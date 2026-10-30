@@ -141,4 +141,265 @@ body[data-page="refleksi"] .reflection h2 {
     color: #254b40;
     margin-bottom: 18px;
 }
+    /* Gaya khusus halaman UTS. Tidak mengubah halaman lain. */
+    .uts-content { max-width: 1050px; }
+    .uts-section { padding: 30px 0; border-top: 1px solid var(--line); }
+    .uts-number { font-size: 10px; color: #829369; letter-spacing: 1.7px; font-weight: 700; }
+    .uts-section h2 { font: 30px Georgia, serif; color: #254b40; margin: 12px 0 18px; }
+    .uts-section h3 { font-size: 16px; color: #254b40; margin: 23px 0 10px; }
+    .uts-section p { text-align: justify; white-space: normal; line-height: 1.9; color: #52645a; margin: 0 0 15px; }
+
+    .uts-frames { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; margin-top: 24px; }
+    .uts-art { min-width: 0; padding: 20px; border: 1px solid var(--line); border-radius: 10px; background: #fffef9; }
+    .uts-art strong { display: block; color: #254b40; font-size: 15px; margin-bottom: 10px; }
+    .uts-art .uts-art-note { font-size: 12px; color: #728078; margin-bottom: 14px; }
+    .uts-art .uts-empty { padding: 25px; border-radius: 8px; background: #f2f5ed; color: #728078; font-size: 12px; text-align: center; }
+    .uts-art .uts-drive-frame { display: none; width: 100%; height: 500px; border: 0; border-radius: 8px; background: #edf1eb; }
+    .uts-art.loaded .uts-drive-frame { display: block; }
+    .uts-art.loaded .uts-empty { display: none; }
+
+    /* Website Coding Clinic ditampilkan langsung, tanpa Google Drive. */
+    .uts-media-actions { display: flex; gap: 12px; flex-wrap: wrap; margin: 14px 0 16px; }
+    .uts-media-actions a { display: inline-flex; align-items: center; padding: 10px 15px; border: 1px solid #cbd5c9; border-radius: 7px; color: #254b40; font-size: 12px; font-weight: 700; text-decoration: none; }
+    .uts-media-actions a:hover { background: #edf2e7; }
+    .uts-art .uts-interactive-frame { display: block; width: 100%; height: 730px; border: 1px solid var(--line); border-radius: 9px; background: #fff; }
+    .uts-video-note { padding: 16px 20px; border-left: 3px solid #92a875; border-radius: 0 8px 8px 0; background: #edf2e7; }
+
+    @media (max-width: 650px) {
+      .uts-section h2 { font-size: 26px; }
+      .uts-art { padding: 14px; }
+      .uts-art .uts-drive-frame { height: 380px; }
+      .uts-art .uts-interactive-frame { height: 650px; }
+    }
+    
+/* ============================================
+   HALAMAN UAS - RUANG REFLEKSI
+   SIKLUS 2, 3, DAN 4
+   ============================================ */
+
+/* KONTEN UTAMA */
+
+body[data-page="uas"] .uas-content {
+    max-width: 1050px;
+}
+
+body[data-page="uas"] .uas-section {
+    padding: 35px 0;
+    border-top: 1px solid var(--line);
+    scroll-margin-top: 100px;
+}
+
+body[data-page="uas"] .uas-number {
+    display: block;
+    font-size: 10px;
+    color: #829369;
+    letter-spacing: 1.7px;
+    font-weight: 700;
+}
+
+body[data-page="uas"] .uas-section h2 {
+    font: 30px Georgia, serif;
+    color: #254b40;
+    margin: 12px 0 20px;
+}
+
+body[data-page="uas"] .uas-section h3 {
+    font-size: 16px;
+    color: #254b40;
+    margin: 25px 0 12px;
+}
+
+body[data-page="uas"] .uas-section p {
+    color: #52645a;
+    line-height: 1.9;
+    text-align: justify;
+    white-space: normal;
+    margin: 0 0 16px;
+}
+
+/* NAVIGASI ANTARSIKLUS */
+
+body[data-page="uas"] .uas-navigation {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin: 15px 0 35px;
+}
+
+body[data-page="uas"] .uas-navigation a {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+    padding: 22px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: #fffef9;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+body[data-page="uas"] .uas-navigation a:hover {
+    background: #edf2e7;
+    transform: translateY(-3px);
+}
+
+body[data-page="uas"] .uas-navigation span {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    color: #829369;
+}
+
+body[data-page="uas"] .uas-navigation strong {
+    font: 23px Georgia, serif;
+    color: #254b40;
+}
+
+body[data-page="uas"] .uas-navigation small {
+    font-size: 12px;
+    color: #728078;
+    line-height: 1.6;
+}
+
+/* KARTU ARTEFAK */
+
+body[data-page="uas"] .uas-frames {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+    margin-top: 24px;
+}
+
+body[data-page="uas"] .uas-art {
+    min-width: 0;
+    padding: 20px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: #fffef9;
+}
+
+body[data-page="uas"] .uas-art strong {
+    display: block;
+    font-size: 15px;
+    color: #254b40;
+    margin-bottom: 10px;
+}
+
+body[data-page="uas"] .uas-art .uas-art-note {
+    font-size: 12px;
+    color: #728078;
+    margin-bottom: 14px;
+}
+
+body[data-page="uas"] .uas-empty {
+    padding: 26px;
+    border-radius: 8px;
+    background: #f2f5ed;
+    color: #728078;
+    font-size: 12px;
+    text-align: center;
+    line-height: 1.7;
+}
+
+/* PREVIEW GOOGLE DRIVE */
+
+body[data-page="uas"] .uas-art .uas-drive-frame {
+    display: none;
+    width: 100%;
+    height: 520px;
+    border: 0;
+    border-radius: 8px;
+    background: #edf1eb;
+}
+
+body[data-page="uas"] .uas-art.loaded .uas-drive-frame {
+    display: block;
+}
+
+body[data-page="uas"] .uas-art.loaded .uas-empty {
+    display: none;
+}
+
+/* VIDEO PEMBELAJARAN SIKLUS 4 */
+
+body[data-page="uas"] .uas-video {
+    margin-top: 30px;
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: #fffef9;
+}
+
+body[data-page="uas"] .uas-video h3 {
+    margin-top: 0;
+}
+
+body[data-page="uas"] #uas-video-container iframe,
+body[data-page="uas"] #uas-video-container video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+    border-radius: 9px;
+    background: #edf1eb;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 800px) {
+    body[data-page="uas"] .uas-navigation {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 650px) {
+    body[data-page="uas"] .uas-section h2 {
+        font-size: 26px;
+    }
+
+    body[data-page="uas"] .uas-art {
+        padding: 14px;
+    }
+
+    body[data-page="uas"] .uas-art .uas-drive-frame {
+        height: 380px;
+    }
+
+    body[data-page="uas"] .uas-video {
+        padding: 15px;
+    }
+}
+
+/* TOMBOL AKSES MEDIA PPT UAS */
+
+body[data-page="uas"] .uas-media-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+body[data-page="uas"] .uas-media-actions a,
+body[data-page="uas"] .uas-open-video {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 15px;
+    border: 1px solid #cbd5c9;
+    border-radius: 7px;
+    background: #edf2e7;
+    color: #254b40;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+body[data-page="uas"] .uas-media-actions a:hover,
+body[data-page="uas"] .uas-open-video:hover {
+    background: #dce8d6;
+}
+
+body[data-page="uas"] .uas-open-video {
+    margin-top: 14px;
+}
 

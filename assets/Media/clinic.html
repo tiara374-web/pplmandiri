@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coding Clinic — Struktur C++</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--text:#18202a;--muted:#667085;--line:#d9dee7;--accent:#2563eb;--ok:#137333;--bad:#b42318;--warn:#9a6700;--code:#0f172a;--codeText:#e5edf7}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text)}
+.wrap{max-width:1100px;margin:auto;padding:24px}.screen{display:none}.screen.active{display:block}
+header{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap;margin-bottom:16px}h1{margin:0;font-size:clamp(26px,4vw,44px)}
+.subtitle{color:var(--muted);margin-top:6px}.score{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 18px;text-align:center}.score b{font-size:26px}
+.progressRow{display:flex;gap:12px;align-items:center;margin-bottom:18px}.bar{height:10px;background:#e9edf3;border-radius:99px;overflow:hidden;flex:1}.bar>div{height:100%;background:var(--accent);transition:.25s}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px}.grid{display:grid;gap:16px}.grid2{grid-template-columns:1.1fr .9fr}@media(max-width:820px){.grid2{grid-template-columns:1fr}}
+.badge{display:inline-block;padding:6px 10px;border-radius:999px;background:#eef2ff;color:#3730a3;font-size:13px;font-weight:700}
+button,select,input{font:inherit}button{border:none;border-radius:12px;padding:12px 16px;cursor:pointer;font-weight:700}.primary{background:var(--accent);color:#fff}.secondary{background:#fff;border:1px solid var(--line);color:var(--text)}button:disabled{opacity:.45;cursor:not-allowed}
+.actions{display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap;margin-top:16px}.code{background:var(--code);color:var(--codeText);border-radius:16px;padding:16px;overflow:auto;font-family:Consolas,monospace;line-height:1.65;white-space:pre-wrap}
+.option{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0;background:#fff}.feedback{margin-top:12px;font-weight:600}.ok{color:var(--ok)}.bad{color:var(--bad)}.warn{color:var(--warn)}
+.note{margin-top:16px;border:2px dashed #f59e0b;background:#fffaf0;border-radius:16px;padding:15px}.note h3{margin:0 0 8px}.note li{margin:6px 0}.small{font-size:14px;color:var(--muted)}
+.codebtn{width:100%;text-align:left;background:#fff;border:1px solid var(--line);margin:5px 0;font-family:Consolas,monospace}.codebtn.selected{outline:3px solid #60a5fa;background:#eff6ff}
+.orderRow{display:flex;gap:10px;align-items:center;border:1px solid var(--line);padding:10px;border-radius:12px;margin:8px 0;background:#fff}.orderRow code{flex:1;min-width:0;overflow-wrap:anywhere}.mini{padding:8px 12px}
+label.field{display:block;margin:12px 0;font-weight:700}select{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;background:#fff}.hidden{display:none}.checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}@media(max-width:640px){.checklist{grid-template-columns:1fr}}footer{text-align:center;color:var(--muted);font-size:13px;margin:22px 0 6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div><div class="badge">Informatika XI • C++ Fundamentals</div><h1>CODING CLINIC: BUILD – CHECK – FIX</h1><div class="subtitle">Pahami struktur program C++, tahu di mana menulis kode, lalu temukan dan perbaiki kesalahan.</div></div><div class="score">Skor<br><b><span id="score">0</span>/60</b></div></header>
+<div class="progressRow"><span id="progressText"><b>Misi 1 dari 7</b></span><div class="bar"><div id="progressBar" style="width:14%"></div></div><button id="resetBtn" class="secondary mini">Ulangi</button></div>
+
+<section class="screen active" data-step="1">
+<div class="grid grid2"><div class="card"><div class="badge">MISI 1 • SPOT THE PROBLEM</div><h2>Ada yang aneh dari program ini?</h2><pre class="code">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+
+    #include &lt;iostream&gt;
+    using namespace std;
+
+    int main() {
+        cout &lt;&lt; "Hello";
+    }
+
+    return 0;
+}</pre></div>
+<form id="spotForm" class="card"><h2>Pilih jawaban</h2><label class="option"><input type="radio" name="spot" value="A"> Tidak ada variabel</label><label class="option"><input type="radio" name="spot" value="B"> Struktur program ditulis dua kali</label><label class="option"><input type="radio" name="spot" value="C"> Tidak ada cin</label><label class="option"><input type="radio" name="spot" value="D"> Tidak ada percabangan</label><button class="primary" type="submit">CHECK</button><div id="spotFeedback" class="feedback"></div></form></div>
+<div class="note"><h3>📒 CATAT DI BUKU — Individu</h3><ol><li>Bagian apa yang ditulis dua kali pada kode di atas?</li><li>Mengapa menulis <code>int main()</code> dua kali bisa menjadi masalah?</li></ol><div class="small">Waktu saran: 2 menit.</div></div><div class="actions"><span></span><button class="primary nextBtn" disabled>Lanjut →</button></div>
+</section>
+
+<section class="screen" data-step="2">
+<div class="card"><div class="badge">MISI 2 • ANATOMI PROGRAM</div><h2>Kode punya tempat. Klik bagian untuk melihat fungsinya.</h2><div class="grid grid2"><div>
+<button class="codebtn anatomy" data-info="Bagian atas program. #include <iostream> menyiapkan fasilitas input dan output.">#include &lt;iostream&gt;</button>
+<button class="codebtn anatomy" data-info="Membantu kita menulis cin dan cout dengan lebih sederhana.">using namespace std;</button>
+<button class="codebtn anatomy" data-info="Program utama. Eksekusi program dimulai dari main().">int main() {</button>
+<button class="codebtn anatomy" data-info="Deklarasi variabel. Membuat tempat bernama nilai untuk menyimpan bilangan bulat.">int nilai;</button>
+<button class="codebtn anatomy" data-info="Input. Data pengguna dimasukkan ke variabel nilai.">cin &gt;&gt; nilai;</button>
+<button class="codebtn anatomy" data-info="Proses/kondisi. Program mengecek apakah nilai minimal 75.">if (nilai &gt;= 75) { ... }</button>
+<button class="codebtn anatomy" data-info="Output. Program menampilkan informasi ke layar.">cout &lt;&lt; "Lulus";</button>
+<button class="codebtn anatomy" data-info="Menandai fungsi main selesai dengan normal.">return 0;</button>
+<button class="codebtn anatomy" data-info="Kurung kurawal membatasi blok program. Isi main berada di antara { dan }.">}</button>
+</div><div class="card" style="background:#fafbff"><h3>Penjelasan</h3><p id="anatomyInfo">Klik salah satu baris di sebelah kiri.</p><hr style="border:none;border-top:1px solid var(--line);margin:18px 0"><b>Peta singkat:</b><p>Bagian atas → persiapan program</p><p><code>main()</code> → rumah utama program</p><p>Di dalam <code>{ }</code> → tempat kita bekerja</p></div></div></div>
+<div class="note"><h3>📒 CATAT DI BUKU — “Peta Program C++”</h3><ol><li><code>#include &lt;iostream&gt;</code> = menyiapkan input/output.</li><li><code>using namespace std;</code> = membantu penulisan <code>cin</code> dan <code>cout</code>.</li><li><code>int main()</code> = program utama.</li><li>Isi program ditulis di dalam <code>{ }</code>.</li><li>Urutan sederhana: <b>Deklarasi → Input → Proses/Kondisi → Output.</b></li></ol></div><div class="actions"><button class="secondary prevBtn">← Kembali</button><button class="primary nextBtn">Lanjut →</button></div>
+</section>
+
+<section class="screen" data-step="3">
+<div class="card"><div class="badge">MISI 3 • BUILD THE PROGRAM</div><h2>Susun program dari atas ke bawah</h2><p class="small">Gunakan tombol ↑ dan ↓.</p><div id="orderList"></div><div class="actions"><button id="shuffleOrder" type="button" class="secondary">Acak Lagi</button><button id="checkOrder" type="button" class="primary">CHECK URUTAN</button></div><div id="orderFeedback" class="feedback"></div></div>
+<div class="note"><h3>📒 CATAT DI BUKU — Individu</h3><p>Tuliskan urutan umum:</p><p><b>________ → main() → ________ → ________ → proses/kondisi → ________ → return 0;</b></p></div><div class="actions"><button class="secondary prevBtn">← Kembali</button><button class="primary nextBtn" disabled>Lanjut →</button></div>
+</section>
+
+<section class="screen" data-step="4">
+<div class="grid grid2"><div class="card"><div class="badge">MISI 4 • SIMULASI PROGRAMIZ</div><h2>Kalau kerangkanya sudah ada, kita menulis di mana?</h2><pre class="code">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+
+    // ← TULIS KODE DI MANA?
+
+    return 0;
+}</pre></div>
+<form id="programizForm" class="card"><h3>Pilih lokasi</h3><label class="option"><input type="radio" name="loc" value="atas"> Di atas #include</label><label class="option"><input type="radio" name="loc" value="main"> Di dalam main(), sebelum return 0;</label><label class="option"><input type="radio" name="loc" value="bawah"> Setelah kurung } terakhir</label><button type="submit" class="primary">CHECK</button><div id="programizFeedback" class="feedback"></div></form></div>
+<div class="note"><h3>📒 CATAT DI BUKU — Kalimat Kunci</h3><p><b>“Jika Programiz sudah menyediakan #include, using namespace, dan int main(), saya tidak menuliskannya ulang. Saya menulis kode di dalam main(), sebelum return 0;.”</b></p></div><div class="actions"><button class="secondary prevBtn">← Kembali</button><button class="primary nextBtn" disabled>Lanjut →</button></div>
+</section>
+
+<section class="screen" data-step="5">
+<div class="card"><div class="badge">MISI 5 • COMPLETE THE CODE</div><h2>Lengkapi bagian kosong</h2><p>Program menerima sebuah nilai lalu menampilkannya kembali.</p><div class="grid grid2"><div>
+<label class="field">Nama variabel<select id="completeVar"><option value="">Pilih...</option><option value="nilai">nilai</option><option value="cout">cout</option><option value="main">main</option></select></label>
+<label class="field">Isi pada cin<select id="completeCin"><option value="">Pilih...</option><option value="nilai">nilai</option><option value="cout">cout</option><option value="main">main</option></select></label>
+<label class="field">Isi pada cout<select id="completeCout"><option value="">Pilih...</option><option value="nilai">nilai</option><option value="cin">cin</option><option value="main">main</option></select></label>
+<button id="checkComplete" type="button" class="primary">CHECK</button><div id="completeFeedback" class="feedback"></div></div><pre class="code">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+
+    int ________;
+    cin &gt;&gt; ________;
+    cout &lt;&lt; ________;
+
+    return 0;
+}</pre></div></div>
+<div class="note"><h3>📒 CATAT DI BUKU — 1 baris alasan</h3><p>Mengapa nama variabel pada <code>cin</code> dan <code>cout</code> harus sesuai dengan variabel yang dideklarasikan?</p></div><div class="actions"><button class="secondary prevBtn">← Kembali</button><button class="primary nextBtn" disabled>Lanjut →</button></div>
+</section>
+
+<section class="screen" data-step="6">
+<div class="card"><div class="badge">MISI 6 • BUG HUNT</div><h2>Klik semua baris yang bermasalah</h2><p class="small">Ada 4 baris bermasalah.</p><div id="bugCode">
+<button class="codebtn bugline" data-line="1">1  #include &lt;iostream&gt;</button><button class="codebtn bugline" data-line="2">2  using namespace std;</button><button class="codebtn bugline" data-line="3">3  int main() {</button><button class="codebtn bugline" data-line="4">4      int umur</button><button class="codebtn bugline" data-line="5">5      cin &lt;&lt; umur;</button><button class="codebtn bugline" data-line="6">6      if umur &gt;= 17 {</button><button class="codebtn bugline" data-line="7">7          cout &gt;&gt; "Boleh membuat SIM"</button><button class="codebtn bugline" data-line="8">8      } else {</button><button class="codebtn bugline" data-line="9">9          cout &lt;&lt; "Belum cukup umur";</button><button class="codebtn bugline" data-line="10">10     }</button><button class="codebtn bugline" data-line="11">11     return 0;</button><button class="codebtn bugline" data-line="12">12 }</button>
+</div><div class="actions"><button id="clearBugs" type="button" class="secondary">Hapus Pilihan</button><button id="checkBugs" type="button" class="primary">CHECK BUGS</button></div><div id="bugFeedback" class="feedback"></div><div id="fixedCode" class="hidden"><h3>Kode setelah diperbaiki</h3><pre class="code">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int umur;
+    cin &gt;&gt; umur;
+
+    if (umur &gt;= 17) {
+        cout &lt;&lt; "Boleh membuat SIM";
+    } else {
+        cout &lt;&lt; "Belum cukup umur";
+    }
+
+    return 0;
+}</pre></div></div>
+<div class="note"><h3>📒 CATAT DI BUKU — Tabel Check & Fix</h3><p>Buat tabel 3 kolom: <b>Bagian Salah | Perbaikan | Alasan</b>. Isi minimal 3 kesalahan.</p></div><div class="actions"><button class="secondary prevBtn">← Kembali</button><button class="primary nextBtn" disabled>Lanjut →</button></div>
+</section>
+
+<section class="screen" data-step="7">
+<div class="grid grid2"><form id="buildForm" class="card"><div class="badge">MISI 7 • BUILD YOUR CODE</div><h2>Rakit program sederhana</h2><p>Kasus: umur minimal 17 tahun boleh membuat SIM.</p>
+<label class="field">Tipe data<select id="typeSel"><option value="">Pilih...</option><option value="int">int</option><option value="float">float</option><option value="string">string</option></select></label>
+<label class="field">Nama variabel<select id="varSel"><option value="">Pilih...</option><option value="umur">umur</option><option value="nama">nama</option><option value="nilai">nilai</option></select></label>
+<label class="field">Operator input<select id="inputSel"><option value="">Pilih...</option><option value=">>">&gt;&gt;</option><option value="<<">&lt;&lt;</option></select></label>
+<label class="field">Kondisi<select id="conditionSel"><option value="">Pilih...</option><option value="umur >= 17">umur &gt;= 17</option><option value="umur <= 17">umur &lt;= 17</option><option value="umur == 17">umur == 17</option></select></label>
+<label class="field">Operator output<select id="outputSel"><option value="">Pilih...</option><option value="<<">&lt;&lt;</option><option value=">>">&gt;&gt;</option></select></label>
+<button type="submit" class="primary">CHECK PROGRAM</button><div id="buildFeedback" class="feedback"></div></form>
+<div class="card"><h3>Preview Program</h3><pre id="buildPreview" class="code">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    // pilih komponen di sebelah kiri
+    return 0;
+}</pre></div></div>
+<div class="note"><h3>📒 TUGAS INDIVIDU DI BUKU — BUILD</h3><ol><li>Tulis: variabel, tipe data, input, kondisi, output TRUE, output FALSE.</li><li>Setelah benar, tulis ulang kodenya di buku tanpa menyalin dari teman.</li><li>Lingkari <code>int main()</code> dan beri panah ke area tempat kalian menulis kode.</li></ol></div>
+<div id="finalCard" class="card hidden" style="margin-top:16px;background:#f0fdf4;border-color:#bbf7d0"><div class="badge">MISSION COMPLETE</div><h2>Checklist sebelum menekan RUN</h2><div class="checklist"><div>✓ Variabel sudah dideklarasikan</div><div>✓ Perintah penting memiliki ;</div><div>✓ cin memakai &gt;&gt;</div><div>✓ cout memakai &lt;&lt;</div><div>✓ kondisi if memakai ( )</div><div>✓ { } lengkap</div><div>✓ kode ditulis di dalam main()</div><div>✓ int main() tidak ditulis dua kali</div></div><h3>Jangan hafalkan seluruh kode. Pahami strukturnya.</h3></div>
+<div class="actions"><button class="secondary prevBtn">← Kembali</button><span></span></div>
+</section>
+<footer>Media pembelajaran interaktif • Coding Clinic C++ • dapat dijalankan langsung di browser</footer>
+</div>
+<script>
+(()=>{
+const screens=[...document.querySelectorAll('.screen')],bar=document.getElementById('progressBar'),pt=document.getElementById('progressText'),scoreEl=document.getElementById('score');let step=1,score=0;const awarded=new Set();
+function award(k,p){if(!awarded.has(k)){awarded.add(k);score+=p;scoreEl.textContent=score}}
+function show(n){step=Math.max(1,Math.min(7,n));screens.forEach(s=>s.classList.toggle('active',Number(s.dataset.step)===step));pt.innerHTML='<b>Misi '+step+' dari 7</b>';bar.style.width=(step/7*100)+'%';window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('.nextBtn').forEach(b=>b.addEventListener('click',()=>show(step+1)));document.querySelectorAll('.prevBtn').forEach(b=>b.addEventListener('click',()=>show(step-1)));
+document.getElementById('spotForm').addEventListener('submit',e=>{e.preventDefault();const v=new FormData(e.currentTarget).get('spot'),f=document.getElementById('spotFeedback'),n=e.currentTarget.closest('.screen').querySelector('.nextBtn');if(!v){f.textContent='Pilih jawaban dulu.';f.className='feedback warn'}else if(v==='B'){f.textContent='Benar. Struktur program ditulis dua kali.';f.className='feedback ok';award('spot',10);n.disabled=false}else{f.textContent='Belum tepat. Perhatikan #include, using namespace, dan int main().';f.className='feedback bad'}});
+document.querySelectorAll('.anatomy').forEach(b=>b.addEventListener('click',()=>document.getElementById('anatomyInfo').textContent=b.dataset.info));
+const correct=['#include <iostream>','using namespace std;','int main() {','int nilai;','cin >> nilai;','cout << nilai;','return 0;','}'];let order=['cin >> nilai;','int main() {','#include <iostream>','int nilai;','return 0;','using namespace std;','}','cout << nilai;'];const list=document.getElementById('orderList');
+function render(){list.innerHTML='';order.forEach((t,i)=>{const r=document.createElement('div');r.className='orderRow';const c=document.createElement('code');c.textContent=t;const u=document.createElement('button');u.type='button';u.className='secondary mini';u.textContent='↑';u.disabled=i===0;u.onclick=()=>{[order[i-1],order[i]]=[order[i],order[i-1]];render()};const d=document.createElement('button');d.type='button';d.className='secondary mini';d.textContent='↓';d.disabled=i===order.length-1;d.onclick=()=>{[order[i+1],order[i]]=[order[i],order[i+1]];render()};r.append(c,u,d);list.append(r)})}render();
+document.getElementById('shuffleOrder').onclick=()=>{order=[...order].sort(()=>Math.random()-.5);render();document.getElementById('orderFeedback').textContent=''};
+document.getElementById('checkOrder').onclick=()=>{const ok=order.every((x,i)=>x===correct[i]),f=document.getElementById('orderFeedback');if(ok){f.textContent='Benar. Program berhasil dibangun.';f.className='feedback ok';award('order',10);document.querySelector('[data-step="3"] .nextBtn').disabled=false}else{f.textContent='Belum tepat. Ingat: bagian atas → main → isi program → return → penutup.';f.className='feedback bad'}};
+document.getElementById('programizForm').addEventListener('submit',e=>{e.preventDefault();const v=new FormData(e.currentTarget).get('loc'),f=document.getElementById('programizFeedback');if(v==='main'){f.textContent='Benar. Isi kode di dalam main(), sebelum return 0;';f.className='feedback ok';award('programiz',10);e.currentTarget.closest('.screen').querySelector('.nextBtn').disabled=false}else{f.textContent=v?'Belum. Kerangka sudah tersedia; kita bekerja di dalam main().':'Pilih lokasi dulu.';f.className='feedback bad'}});
+document.getElementById('checkComplete').onclick=()=>{const ok=['completeVar','completeCin','completeCout'].every(id=>document.getElementById(id).value==='nilai'),f=document.getElementById('completeFeedback');if(ok){f.textContent='Benar. Variabel dibuat → data dimasukkan → data ditampilkan.';f.className='feedback ok';award('complete',10);document.querySelector('[data-step="5"] .nextBtn').disabled=false}else{f.textContent='Belum tepat. Cek apakah nama variabel konsisten.';f.className='feedback bad'}};
+const selected=new Set();document.querySelectorAll('.bugline').forEach(b=>b.onclick=()=>{const n=Number(b.dataset.line);selected.has(n)?selected.delete(n):selected.add(n);b.classList.toggle('selected',selected.has(n))});document.getElementById('clearBugs').onclick=()=>{selected.clear();document.querySelectorAll('.bugline').forEach(b=>b.classList.remove('selected'));document.getElementById('bugFeedback').textContent=''};
+document.getElementById('checkBugs').onclick=()=>{const w=[4,5,6,7],ok=selected.size===w.length&&w.every(n=>selected.has(n)),f=document.getElementById('bugFeedback');if(ok){f.textContent='Benar. Bug ditemukan pada deklarasi umur, cin, if, dan cout.';f.className='feedback ok';document.getElementById('fixedCode').classList.remove('hidden');award('bugs',10);document.querySelector('[data-step="6"] .nextBtn').disabled=false}else{f.textContent='Belum semua tepat. Gunakan checklist: ;  cin >>  if ( )  cout <<';f.className='feedback bad'}};
+const ids=['typeSel','varSel','inputSel','conditionSel','outputSel'];function preview(){const type=document.getElementById('typeSel').value||'...',v=document.getElementById('varSel').value||'...',inp=document.getElementById('inputSel').value||'...',cond=document.getElementById('conditionSel').value||'...',out=document.getElementById('outputSel').value||'...';document.getElementById('buildPreview').textContent=`#include <iostream>\nusing namespace std;\n\nint main() {\n    ${type} ${v};\n    cin ${inp} ${v};\n\n    if (${cond}) {\n        cout ${out} "Boleh membuat SIM";\n    } else {\n        cout ${out} "Belum cukup umur";\n    }\n\n    return 0;\n}`};ids.forEach(id=>document.getElementById(id).onchange=preview);
+document.getElementById('buildForm').addEventListener('submit',e=>{e.preventDefault();const ok=document.getElementById('typeSel').value==='int'&&document.getElementById('varSel').value==='umur'&&document.getElementById('inputSel').value==='>>'&&document.getElementById('conditionSel').value==='umur >= 17'&&document.getElementById('outputSel').value==='<<',f=document.getElementById('buildFeedback');if(ok){f.textContent='Program benar. Struktur dan operator sudah sesuai.';f.className='feedback ok';award('build',10);document.getElementById('finalCard').classList.remove('hidden')}else{f.textContent='Masih ada yang perlu diperiksa. Cek tipe data, variabel, cin/cout, dan kondisi.';f.className='feedback bad'}});
+document.getElementById('resetBtn').onclick=()=>location.reload();show(1);
+})();
+</script>
+</body>
+</html>
