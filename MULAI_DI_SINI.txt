@@ -1,0 +1,6 @@
+1. Ekstrak ZIP ke folder baru.
+2. Buka index.html.
+3. Semua teks diubah langsung di HTML masing-masing halaman.
+4. URL media ada di href pada kartu di lampiran.html / analisis-artefak.html.
+5. Baca PANDUAN.html untuk contoh kartu dan cara mengaktifkannya.
+6. Unggah ulang HTML setelah mengedit.
